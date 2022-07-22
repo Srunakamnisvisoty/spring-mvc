@@ -11,4 +11,17 @@ public class Car {
         this.number = number;
         this.age = age;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
 }
