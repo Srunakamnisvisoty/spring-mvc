@@ -2,9 +2,7 @@ package web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import web.model.Car;
 
 import java.util.ArrayList;
@@ -24,16 +22,19 @@ public class CarController {
         return cars;
     }
 
-    @GetMapping(value = "/count={count}")
-    public String getCars(@PathVariable("count") int count, ModelMap model) {
+    @GetMapping
+    public String getCars(@RequestParam(required = false) Integer count, ModelMap model) {
+        if (count == null) {
+            model.addAttribute("carList", carsList());
+            return "cars";
+        }
         model.addAttribute("carList", count >= carsList().size() ? carsList() : carsList().subList(0, count));
         return "cars";
     }
 
-    @GetMapping()
-    public String getAllCars(ModelMap model) {
-        model.addAttribute("carList", carsList());
-        return "cars";
-    }
-
+//    @GetMapping()
+//    public String getAllCars(ModelMap model) {
+//        model.addAttribute("carList", carsList());
+//        return "cars";
+//    }
 }
